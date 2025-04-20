@@ -171,17 +171,16 @@ var mergeTwoLists = function(list1, list2) {
 // 141 
 
 var hasCycle = function(head) {
-    let current = head;
-    const cache = new Set();
+    let slow = head;
+    let fast = head;
 
-    while(current !== null) {
-        if(cache.has(current)) {
+    while(fast && fast.next) {
+        if(slow === fast.next) {
             return true;
         }
-
-        cache.add(current);
-        current = current.next;
-    }
+        slow = slow.next;
+        fast = fast.next.next;
+    }  
 
     return false;
 };
